@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>scripts/knockout.bindings.js - {{name}}</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="http://a3d72a45d111006ec192-ec5b80a12b0b09b4d52373336afb4254.r80.cf1.rackcdn.com/usability-dynamics.png" title="{{name}}"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.0.1</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: scripts/knockout.bindings.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * UD Handlers for Knockout JS
+ *
+ * @version 1.0
+ * @description Set of bindingHandlers for Knockout library
+ * @package Knockout
+ * @subpackage UD
+ * @dependencies jquery, knockout-mapping
+ * @author team@UD
+ */
+(function ( factory ) {
+  if ( typeof define === &quot;function&quot; &amp;&amp; define.amd ) {
+    define( [ &quot;knockout&quot;, &quot;jquery&quot;, &quot;jquery.ui.sortable&quot; ], factory );
+  } else {
+    factory( window.ko, jQuery );
+  }
+})
+
+( function ( ko, $, undefined ) {
+
+  /**
+   * Binding for Sortable items
+   * @author korotkov@ud
+   */
+  ko.bindingHandlers.sortable = {
+    init: function ( element, valueAccessor, allBindingsAccessor, viewModel, bindingContext ) {
+    },
+    update: function ( element, valueAccessor, allBindingsAccessor, viewModel, bindingContext ) {
+      jQuery( element ).sortable( valueAccessor() );
+    }
+  };
+
+  /**
+   * Prevent form submit on enter key
+   */
+  ko.bindingHandlers.enter_key = {
+    init: function ( element, valueAccessor, allBindingsAccessor, viewModel, bindingContext ) {
+      jQuery( element ).keypress( function ( event ) {
+        var keyCode = (event.which ? event.which : event.keyCode);
+        if ( keyCode === 13 ) {
+          return false;
+        }
+        return true;
+      } );
+    }
+  };
+
+  /**
+   * Binding for Tabs
+   * @author korotkov@ud
+   */
+  ko.bindingHandlers.tabbed = {
+    init: function ( element, valueAccessor, allBindingsAccessor, viewModel, bindingContext ) {
+
+      ko.utils.domNodeDisposal.addDisposeCallback( element, function () {
+        jQuery( element ).tabs( &quot;destroy&quot; );
+      } );
+
+    },
+    update: function ( element, valueAccessor, allBindingsAccessor, viewModel, bindingContext ) {
+
+      jQuery( element ).bind( &quot;tabsselect&quot;, function ( event, ui ) {
+        wpp.attributes_tab_index = ui.index - 1;
+      } );
+
+      setTimeout( function () {
+
+        try {
+
+          var elem = jQuery( element );
+
+          if ( elem.is( &#x27;:ui-tabs&#x27; ) )
+            elem.tabs( &quot;destroy&quot; );
+
+          var $tabs = elem.tabs();
+
+          $tabs.tabs( &quot;option&quot;, &quot;selected&quot;, (wpp.attributes_tab_index !== &#x27;undefined&#x27; ? wpp.attributes_tab_index : 0) );
+          if ( typeof allBindingsAccessor().droppable !== &#x27;undefined&#x27; ) {
+
+            var defaults = {
+              list: &#x27;.connectedSortable&#x27;,
+              accept: &#x27;.connectedSortable li&#x27;,
+              hoverClass: &#x27;ui-state-hover&#x27;
+            };
+
+            var data = jQuery.extend( defaults, allBindingsAccessor().droppable );
+
+            data.drop = function ( event, ui ) {
+              if ( typeof data.drop_cb == &#x27;function&#x27; ) {
+                data.drop_cb( event, ui, viewModel );
+              }
+            }
+
+            jQuery( &quot;ul:first li&quot;, $tabs ).droppable( data );
+          }
+
+        } catch ( e ) {
+          wpp.log( &#x27;ko.bindingHandlers.tabbed&#x27;, e.message );
+        }
+
+      }, 200 );
+    }
+  };
+
+  /**
+   * Generates unique slug on fly
+   *
+   * Example: &lt;input type=&quot;text&quot; data-bind=&quot; unique_slug: { slug: &#x27;slug&#x27;, text: &#x27;label&#x27;, instance: &#x27;some_unique_name&#x27; } &quot; /&gt;
+   *
+   * @author peshkov@UD
+   */
+  ko.bindingHandlers.unique_slug = {
+    init: function ( element, valueAccessor, allBindingsAccessor, viewModel, bindingContext ) {
+      var settings = jQuery.extend( {
+        &#x27;slug&#x27;: false, // viewmodel[ settings.slug ]
+        &#x27;text&#x27;: false, // viewmodel[ settings.label ]
+        &#x27;instance&#x27;: false, // unique class which will be added to label field to determine list of related data ( other label fields )
+        &#x27;storage&#x27;: false, // boolean
+        &#x27;value_to_slug&#x27;: false // Sets value to slug
+      }, valueAccessor() );
+      /* All settings args are required */
+      if ( !settings.slug || !settings.text || !settings.instance ) {
+        return false;
+      }
+      /* Links to slug and label data must be correct */
+      if ( typeof settings.slug === &#x27;undefined&#x27; || typeof settings.text === &#x27;undefined&#x27; ) {
+        return false;
+      }
+      /* Creates slug from string */
+      var create_slug = function ( slug ) {
+        slug = slug.replace( /[^a-zA-Z0-9_\s]/g, &quot;&quot; );
+        slug = slug.toLowerCase();
+        slug = slug.replace( /\s/g, &#x27;_&#x27; );
+        return slug;
+      };
+      //** If need to be stored in variable */
+      if ( settings.storage ) {
+        if ( typeof window.__ud_slug_storage == &#x27;undefined&#x27; ) window.__ud_slug_storage = {};
+        if ( typeof window.__ud_slug_storage[settings.instance] == &#x27;undefined&#x27; ) window.__ud_slug_storage[settings.instance] = [];
+        if ( window.__ud_slug_storage[settings.instance].indexOf( settings.slug() ) == -1 ) {
+          window.__ud_slug_storage[settings.instance].push( settings.slug() );
+        }
+      }
+      /* Adds Bindings to the current element */
+      jQuery( element ).addClass( settings.instance ).data( &#x27;slug&#x27;, settings.slug() ).change( function () {
+        var self = this, val = jQuery( this ).val(), slug = create_slug( val ), exist = false;
+        /* Be sure that slug is not empty */
+        if ( slug === &#x27;&#x27; ) {
+          slug = &#x27;random&#x27;;
+        }
+        /* Determine if slug is aready exist */
+        if ( settings.storage ) {
+          if ( typeof window.__ud_slug_storage[settings.instance] !== &#x27;undefined&#x27; ) {
+            if ( window.__ud_slug_storage[settings.instance].indexOf( slug ) != -1 ) {
+              exist = true;
+            }
+          }
+        } else {
+          jQuery( &#x27;.&#x27; + settings.instance ).each( function ( i, e ) {
+            if ( e !== self &amp;&amp; slug === jQuery( e ).data( &#x27;slug&#x27; ) ) {
+              exist = true;
+            }
+          } );
+        }
+        /* Set unique slug by unique ID adding. */
+        if ( exist ) {
+          slug += &#x27;_&#x27; + ( Math.floor( Math.random() * (99999999 - 1000000 + 1) ) + 1000000 )
+        }
+        /* Do not set slug again if item is not new */
+        if ( typeof viewModel.new_item == &#x27;function&#x27; ) {
+          if ( !viewModel.new_item() ) {
+            return false;
+          }
+        }
+        /* Set slug */
+        if ( typeof settings.slug === &#x27;function&#x27; ) settings.slug( slug ); else settings.slug = slug;
+        /* Re-set label using observable if needed */
+        if ( typeof settings.text === &#x27;function&#x27; ) settings.text( val ); else settings.text = val;
+        /*  */
+        jQuery( self ).data( &#x27;slug&#x27;, slug );
+        /* */
+        if ( settings.value_to_slug &amp;&amp; slug !== &#x27;random&#x27; ) {
+          jQuery( self ).val( slug );
+        }
+      } );
+      /* Manually fire &#x27;change&#x27; event to check slug of the current element on init */
+      setTimeout( function () {
+        jQuery( element ).trigger( &#x27;change&#x27; )
+      }, 100 );
+    }
+  }
+
+  /**
+   * Utilizes Select2. Draws multiselect.
+   *
+   * @since 2.0
+   * @author potanin@UD
+   */
+  ko.bindingHandlers.select = {
+    init: function ( element, valueAccessor, allBindingsAccessor ) {
+      var obj = valueAccessor(), allBindings = allBindingsAccessor(), lookupKey = allBindings.lookupKey;
+      jQuery( element ).select2( obj );
+      if ( lookupKey ) {
+        var value = ko.utils.unwrapObservable( allBindings.value );
+        jQuery( element ).select2( &#x27;data&#x27;, ko.utils.arrayFirst( obj.data.results, function ( item ) {
+          return item[lookupKey] === value;
+        } ) );
+      }
+      ko.utils.domNodeDisposal.addDisposeCallback( element, function () {
+        jQuery( element ).select2( &#x27;destroy&#x27; );
+      } );
+
+    },
+    update: function ( element ) {
+      //jQuery(element).trigger(&#x27;change&#x27;);
+    }
+  };
+
+  /**
+   * UI datepicker.
+   *
+   * Usage:
+   * &lt;input data-bind=&quot;datepicker: myDate, datepickerOptions: { minDate: new Date() }&quot; /&gt;
+   * myDate should be an observable valiable with value of Date() type
+   */
+  ko.bindingHandlers.datepicker = {
+    init: function ( element, valueAccessor, allBindingsAccessor ) {
+      //initialize datepicker with some optional options
+      var options = allBindingsAccessor().datepickerOptions || {};
+      jQuery( element ).datepicker( options );
+
+      //handle the field changing
+      ko.utils.registerEventHandler( element, &quot;change&quot;, function () {
+        var observable = valueAccessor();
+        observable( jQuery( element ).datepicker( &quot;getDate&quot; ) );
+      } );
+
+      //handle disposal (if KO removes by the template binding)
+      ko.utils.domNodeDisposal.addDisposeCallback( element, function () {
+        jQuery( element ).datepicker( &quot;destroy&quot; );
+      } );
+
+    },
+    update: function ( element, valueAccessor ) {
+      var value = ko.utils.unwrapObservable( valueAccessor() );
+
+      //handle date data coming via json from Microsoft
+      if ( String( value ).indexOf( &#x27;/Date(&#x27; ) == 0 ) {
+        value = new Date( parseInt( value.replace( /\/Date\((.*?)\)\//gi, &quot;$1&quot; ) ) );
+      }
+
+      var current = jQuery( element ).datepicker( &quot;getDate&quot; );
+
+      if ( value - current !== 0 ) {
+        jQuery( element ).datepicker( &quot;setDate&quot;, value );
+      }
+    }
+  };
+
+  /**
+   * LazyLoad
+   */
+  ko.bindingHandlers.lazyload = {
+    init: function ( element, valueAccessor, allBindingsAccessor, viewModel, bindingContext ) {
+      var options = valueAccessor() || {};
+      jQuery( element ).lazyload( options );
+      ko.utils.domNodeDisposal.addDisposeCallback( element, function () {
+        jQuery( element ).unbind();
+      } );
+    }
+  };
+
+  /**
+   * Renders &#x27;help&#x27; Tooltip
+   * It&#x27;s just a helpfull wrapper for tooltip
+   *
+   * @author peshkov@UD
+   */
+  ko.bindingHandlers.help = {
+    init: function ( element, valueAccessor, allBindingsAccessor, viewModel, bindingContext ) {
+      jQuery( element ).addClass( &#x27;wpp_help wpp_button&#x27; ).append( &#x27;&lt;span class=&quot;wpp_icon wpp_icon_106&quot;&gt;&lt;/span&gt;&#x27; ).append( &#x27;&lt;div class=&quot;wpp_description&quot;&gt;&lt;/div&gt;&#x27; ).find( &#x27;.wpp_description&#x27; ).html( valueAccessor() );
+    }
+  };
+
+  /**
+   * Prints data to console
+   * Can be used for troubleshooting
+   *
+   * @author peshkovUD
+   */
+  ko.bindingHandlers.console = {
+    init: function ( element, valueAccessor, allBindingsAccessor, viewModel, bindingContext ) {
+      var d = valueAccessor();
+      if ( typeof d === &#x27;function&#x27; ) {
+        console.log( &#x27;observable&#x27;, d() );
+      } else {
+        console.log( &#x27;static&#x27;, d );
+      }
+    }
+  }
+
+} );
+
+
+
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

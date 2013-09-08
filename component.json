@@ -1,27 +1,22 @@
 {
-  "name": "js-mvvm",
+  "name": "mvvm",
   "version": "0.0.1",
-  "description": "js-mvvm",
+  "description": "JavaScript MvvM Kibrary. Includes 2.3.0 version of Knockout.js",
   "homepage": "http://github.com/UsabilityDynamics/js-mvvm",
   "private": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/UsabilityDynamics/js-mvvm"
   },
-  "dependencies": {
-    "usabilitydynamics/ud-lib-utility": "*"
-  },  
-  "lib": [
-    "lib/core.php"
-  ],
-  "files": [
-    "files/schema.json"
-  ],
-  "styles": [
-    "styles/index.css"
-  ],
+  "dependencies": {},
+  "files": [ "files/schema/mvvm.json" ],
+  "styles": [ "styles/mvvm.css" ],
   "scripts": [
-    "scripts/index.js"
+    "scripts/mvvm.js",
+    "scripts/knockout.js",
+    "scripts/knockout.bindings.js",
+    "scripts/knockout.mapping.js",
+    "scripts/knockout.vm.js",
   ],
   "authors": [
     {

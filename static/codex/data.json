@@ -1,0 +1,545 @@
+{
+    "project": {
+        "name": "{{name}}",
+        "description": "{{description}}",
+        "version": "0.0.1",
+        "url": "https://github.com/UsabilityDynamics/{{name}}/",
+        "logo": "http://a3d72a45d111006ec192-ec5b80a12b0b09b4d52373336afb4254.r80.cf1.rackcdn.com/usability-dynamics.png"
+    },
+    "files": {
+        "scripts/knockout.bindings.js": {
+            "name": "scripts/knockout.bindings.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "scripts/knockout.mapping.js": {
+            "name": "scripts/knockout.mapping.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "scripts/knockout.vm.js": {
+            "name": "scripts/knockout.vm.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {},
+    "classitems": [
+        {
+            "file": "scripts/knockout.bindings.js",
+            "line": 1,
+            "description": "Set of bindingHandlers for Knockout library",
+            "version": "1.0",
+            "package": "Knockout",
+            "subpackage": "UD",
+            "dependencies": "jquery, knockout-mapping",
+            "author": "team@UD",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.bindings.js",
+            "line": 21,
+            "description": "Binding for Sortable items",
+            "author": "korotkov@ud",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.bindings.js",
+            "line": 33,
+            "description": "Prevent form submit on enter key",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.bindings.js",
+            "line": 48,
+            "description": "Binding for Tabs",
+            "author": "korotkov@ud",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.bindings.js",
+            "line": 105,
+            "description": "Generates unique slug on fly\n\nExample: <input type=\"text\" data-bind=\" unique_slug: { slug: 'slug', text: 'label', instance: 'some_unique_name' } \" />",
+            "author": "peshkov@UD",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.bindings.js",
+            "line": 193,
+            "description": "Utilizes Select2. Draws multiselect.",
+            "since": "2.0",
+            "author": "potanin@UD",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.bindings.js",
+            "line": 219,
+            "description": "UI datepicker.\n\nUsage:\n<input data-bind=\"datepicker: myDate, datepickerOptions: { minDate: new Date() }\" />\nmyDate should be an observable valiable with value of Date() type",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.bindings.js",
+            "line": 260,
+            "description": "LazyLoad",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.bindings.js",
+            "line": 273,
+            "description": "Renders 'help' Tooltip\nIt's just a helpfull wrapper for tooltip",
+            "author": "peshkov@UD",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.bindings.js",
+            "line": 285,
+            "description": "Prints data to console\nCan be used for troubleshooting",
+            "author": "peshkovUD",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.mapping.js",
+            "line": 1,
+            "description": "Knockout Mapping plugin. http://knockoutjs.com/",
+            "version": "2.3.2",
+            "package": "Knockout",
+            "author": "Steven Sanderson",
+            "license": "MIT",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 1,
+            "description": "ViewModel class for all knockout/saas instances ( view models )",
+            "version": "1.0",
+            "package": "Knockout",
+            "subpackage": "UD",
+            "dependencies": "jquery, knockout, knockout-mapping, ud.socket, ud.saas",
+            "author": "team@UD",
+            "params": [
+                {
+                    "name": "args.",
+                    "description": "mixed. Settings."
+                }
+            ],
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 87,
+            "description": "Determine if Saas connection is not established.\nIf yes, - so it can be the reason of timeout.\nTry to ignore Saas connection in this case and apply bindings without Saas. peshkov@UD",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 125,
+            "description": "Creates View_Model\n\nAny view_model methods or static variables shoud be added inside of this function.",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 164,
+            "description": "Pushes new element to array.\n\nExample of usage:\ndata-bind=\"click: $root.add_data.bind( $data, $root.some_array, $root.vhandler )\"\nwhere $root.vhandler is a function, which creates data.\n\n$root.vhandler example:\nself.handler = function() {\n  var self = this;\n  self.arg1 = ko.observable( 'value1' );\n  self.arg2 = 'value2';\n}",
+            "params": [
+                {
+                    "name": "observableArray",
+                    "description": "item. Where we want to add new data"
+                },
+                {
+                    "name": "mixed",
+                    "description": "vhandler. Name of function or function which inits new data"
+                },
+                {
+                    "name": "object",
+                    "description": "view_model. The current view_model object"
+                },
+                {
+                    "name": "object",
+                    "description": "event."
+                }
+            ],
+            "author": "peshkov@UD",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 194,
+            "description": "Removes data from array.\n\nExample of usage:\ndata-bind=\"click: $root.remove_data.bind( $data, $root.some_array )\"",
+            "params": [
+                {
+                    "name": "observableArray",
+                    "description": "item. Where we want to remove data"
+                },
+                {
+                    "name": "mixed",
+                    "description": "data. Data which should be removed from array."
+                },
+                {
+                    "name": "object",
+                    "description": "event."
+                }
+            ],
+            "author": "peshkov@UD",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 215,
+            "description": "Checks item in array\nTemplate Helper Function",
+            "author": "potanin@UD",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 227,
+            "description": "Renders Message in Navbar sent by SaaS.",
+            "author": "potanin@UD",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 274,
+            "description": "Wrapper for ko.applyBindings()\n\nCalls before ko.applyBindings() - self.pre_apply()\nCalls after ko.applyBindings()  - init()",
+            "author": "peshkov@UD",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 321,
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 342,
+            "description": "Recursively parses model data and prepares it for MVVM view_model.\nInternal function which called automatically on view_model initialization.\nShould not be used manually!",
+            "author": "peshkov@UD",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 400,
+            "description": "Contains additional interfaces added by hooks\n\nIt's used instead of do_action.\nYou should add all additional data to the current interface by apply_filter,\nwhich has to be called in model.\n\nTo add 'some_action' hook to interface you should do the following steps:\nView:\n<div data-action_hook=\"some_action\"></div>\nModel:\nr._action = { some_hook: [ '<div>HEllo</div>', '<span>WoRlD!</span>' ], some_other_hook: [ '' ], ... }\nResult:\n<div data-action_hook=\"some_action\"><div>HEllo</div><span>WoRlD!</span></div>",
+            "author": "peshkov@UD",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 421,
+            "description": "SAAS interface\nUsed by SaaS. All data for SaaS emit should be added here.",
+            "author": "peshkov@UD",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 452,
+            "description": "Any other data.\nCheck it recursively.",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 461,
+            "description": "Determine if we need to check data recursively or just set value.",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 484,
+            "description": "Determine if we already have model or we need to get it from server.",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 490,
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 534,
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 550,
+            "description": "Go through all hooks and add interfaces if exist.\nSee: case _action in self._prepare_model_data()",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 567,
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 570,
+            "description": "Ran after SaaS has trigger Screen Set Event, meaning it is ready",
+            "author": "potanin@UD",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 578,
+            "description": "If ignore is true we stop SaaS initialization.\nIt happens, if timeout is called and Saas is still not established.",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 586,
+            "description": "Determine if view_model has saas data before add listeners",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 595,
+            "description": "Wait for Interface Request",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 608,
+            "description": "Monitor Update Triggers, and set values",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 651,
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 662,
+            "description": "Observable data, pares and add Subscribers to all observable items that emit updates",
+            "params": [
+                {
+                    "name": "data",
+                    "description": ""
+                },
+                {
+                    "name": "path",
+                    "description": ""
+                }
+            ],
+            "author": "potanin@UD",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 715,
+            "description": "Now we try to connect to SaaS ( if saas.model is set )\nIf SaaS Screen is specified, we wait for screen to be ready, and then load Interface, if needed",
+            "class": ""
+        },
+        {
+            "file": "scripts/knockout.vm.js",
+            "line": 722,
+            "class": ""
+        }
+    ],
+    "warnings": [
+        {
+            "message": "unknown tag: version",
+            "line": " scripts/knockout.bindings.js:1"
+        },
+        {
+            "message": "unknown tag: package",
+            "line": " scripts/knockout.bindings.js:1"
+        },
+        {
+            "message": "unknown tag: subpackage",
+            "line": " scripts/knockout.bindings.js:1"
+        },
+        {
+            "message": "unknown tag: dependencies",
+            "line": " scripts/knockout.bindings.js:1"
+        },
+        {
+            "message": "unknown tag: version",
+            "line": " scripts/knockout.mapping.js:1"
+        },
+        {
+            "message": "unknown tag: package",
+            "line": " scripts/knockout.mapping.js:1"
+        },
+        {
+            "message": "unknown tag: license",
+            "line": " scripts/knockout.mapping.js:1"
+        },
+        {
+            "message": "unknown tag: version",
+            "line": " scripts/knockout.vm.js:1"
+        },
+        {
+            "message": "unknown tag: package",
+            "line": " scripts/knockout.vm.js:1"
+        },
+        {
+            "message": "unknown tag: subpackage",
+            "line": " scripts/knockout.vm.js:1"
+        },
+        {
+            "message": "unknown tag: dependencies",
+            "line": " scripts/knockout.vm.js:1"
+        },
+        {
+            "message": "Missing item type\nSet of bindingHandlers for Knockout library",
+            "line": " scripts/knockout.bindings.js:1"
+        },
+        {
+            "message": "Missing item type\nBinding for Sortable items",
+            "line": " scripts/knockout.bindings.js:21"
+        },
+        {
+            "message": "Missing item type\nPrevent form submit on enter key",
+            "line": " scripts/knockout.bindings.js:33"
+        },
+        {
+            "message": "Missing item type\nBinding for Tabs",
+            "line": " scripts/knockout.bindings.js:48"
+        },
+        {
+            "message": "Missing item type\nGenerates unique slug on fly\n\nExample: <input type=\"text\" data-bind=\" unique_slug: { slug: 'slug', text: 'label', instance: 'some_unique_name' } \" />",
+            "line": " scripts/knockout.bindings.js:105"
+        },
+        {
+            "message": "Missing item type\nUtilizes Select2. Draws multiselect.",
+            "line": " scripts/knockout.bindings.js:193"
+        },
+        {
+            "message": "Missing item type\nUI datepicker.\n\nUsage:\n<input data-bind=\"datepicker: myDate, datepickerOptions: { minDate: new Date() }\" />\nmyDate should be an observable valiable with value of Date() type",
+            "line": " scripts/knockout.bindings.js:219"
+        },
+        {
+            "message": "Missing item type\nLazyLoad",
+            "line": " scripts/knockout.bindings.js:260"
+        },
+        {
+            "message": "Missing item type\nRenders 'help' Tooltip\nIt's just a helpfull wrapper for tooltip",
+            "line": " scripts/knockout.bindings.js:273"
+        },
+        {
+            "message": "Missing item type\nPrints data to console\nCan be used for troubleshooting",
+            "line": " scripts/knockout.bindings.js:285"
+        },
+        {
+            "message": "Missing item type\nKnockout Mapping plugin. http://knockoutjs.com/",
+            "line": " scripts/knockout.mapping.js:1"
+        },
+        {
+            "message": "Missing item type\nViewModel class for all knockout/saas instances ( view models )",
+            "line": " scripts/knockout.vm.js:1"
+        },
+        {
+            "message": "Missing item type\nDetermine if Saas connection is not established.\nIf yes, - so it can be the reason of timeout.\nTry to ignore Saas connection in this case and apply bindings without Saas. peshkov@UD",
+            "line": " scripts/knockout.vm.js:87"
+        },
+        {
+            "message": "Missing item type\nCreates View_Model\n\nAny view_model methods or static variables shoud be added inside of this function.",
+            "line": " scripts/knockout.vm.js:125"
+        },
+        {
+            "message": "Missing item type\nPushes new element to array.\n\nExample of usage:\ndata-bind=\"click: $root.add_data.bind( $data, $root.some_array, $root.vhandler )\"\nwhere $root.vhandler is a function, which creates data.\n\n$root.vhandler example:\nself.handler = function() {\n  var self = this;\n  self.arg1 = ko.observable( 'value1' );\n  self.arg2 = 'value2';\n}",
+            "line": " scripts/knockout.vm.js:164"
+        },
+        {
+            "message": "Missing item type\nRemoves data from array.\n\nExample of usage:\ndata-bind=\"click: $root.remove_data.bind( $data, $root.some_array )\"",
+            "line": " scripts/knockout.vm.js:194"
+        },
+        {
+            "message": "Missing item type\nChecks item in array\nTemplate Helper Function",
+            "line": " scripts/knockout.vm.js:215"
+        },
+        {
+            "message": "Missing item type\nRenders Message in Navbar sent by SaaS.",
+            "line": " scripts/knockout.vm.js:227"
+        },
+        {
+            "message": "Missing item type\nWrapper for ko.applyBindings()\n\nCalls before ko.applyBindings() - self.pre_apply()\nCalls after ko.applyBindings()  - init()",
+            "line": " scripts/knockout.vm.js:274"
+        },
+        {
+            "message": "Missing item type",
+            "line": " scripts/knockout.vm.js:321"
+        },
+        {
+            "message": "Missing item type\nRecursively parses model data and prepares it for MVVM view_model.\nInternal function which called automatically on view_model initialization.\nShould not be used manually!",
+            "line": " scripts/knockout.vm.js:342"
+        },
+        {
+            "message": "Missing item type\nContains additional interfaces added by hooks\n\nIt's used instead of do_action.\nYou should add all additional data to the current interface by apply_filter,\nwhich has to be called in model.\n\nTo add 'some_action' hook to interface you should do the following steps:\nView:\n<div data-action_hook=\"some_action\"></div>\nModel:\nr._action = { some_hook: [ '<div>HEllo</div>', '<span>WoRlD!</span>' ], some_other_hook: [ '' ], ... }\nResult:\n<div data-action_hook=\"some_action\"><div>HEllo</div><span>WoRlD!</span></div>",
+            "line": " scripts/knockout.vm.js:400"
+        },
+        {
+            "message": "Missing item type\nSAAS interface\nUsed by SaaS. All data for SaaS emit should be added here.",
+            "line": " scripts/knockout.vm.js:421"
+        },
+        {
+            "message": "Missing item type\nAny other data.\nCheck it recursively.",
+            "line": " scripts/knockout.vm.js:452"
+        },
+        {
+            "message": "Missing item type\nDetermine if we need to check data recursively or just set value.",
+            "line": " scripts/knockout.vm.js:461"
+        },
+        {
+            "message": "Missing item type\nDetermine if we already have model or we need to get it from server.",
+            "line": " scripts/knockout.vm.js:484"
+        },
+        {
+            "message": "Missing item type",
+            "line": " scripts/knockout.vm.js:490"
+        },
+        {
+            "message": "Missing item type",
+            "line": " scripts/knockout.vm.js:534"
+        },
+        {
+            "message": "Missing item type\nGo through all hooks and add interfaces if exist.\nSee: case _action in self._prepare_model_data()",
+            "line": " scripts/knockout.vm.js:550"
+        },
+        {
+            "message": "Missing item type",
+            "line": " scripts/knockout.vm.js:567"
+        },
+        {
+            "message": "Missing item type\nRan after SaaS has trigger Screen Set Event, meaning it is ready",
+            "line": " scripts/knockout.vm.js:570"
+        },
+        {
+            "message": "Missing item type\nIf ignore is true we stop SaaS initialization.\nIt happens, if timeout is called and Saas is still not established.",
+            "line": " scripts/knockout.vm.js:578"
+        },
+        {
+            "message": "Missing item type\nDetermine if view_model has saas data before add listeners",
+            "line": " scripts/knockout.vm.js:586"
+        },
+        {
+            "message": "Missing item type\nWait for Interface Request",
+            "line": " scripts/knockout.vm.js:595"
+        },
+        {
+            "message": "Missing item type\nMonitor Update Triggers, and set values",
+            "line": " scripts/knockout.vm.js:608"
+        },
+        {
+            "message": "Missing item type",
+            "line": " scripts/knockout.vm.js:651"
+        },
+        {
+            "message": "Missing item type\nObservable data, pares and add Subscribers to all observable items that emit updates",
+            "line": " scripts/knockout.vm.js:662"
+        },
+        {
+            "message": "Missing item type\nNow we try to connect to SaaS ( if saas.model is set )\nIf SaaS Screen is specified, we wait for screen to be ready, and then load Interface, if needed",
+            "line": " scripts/knockout.vm.js:715"
+        },
+        {
+            "message": "Missing item type",
+            "line": " scripts/knockout.vm.js:722"
+        }
+    ]
+}
