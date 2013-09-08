@@ -16,7 +16,7 @@
     "scripts/knockout.js",
     "scripts/knockout.bindings.js",
     "scripts/knockout.mapping.js",
-    "scripts/knockout.vm.js",
+    "scripts/knockout.vm.js"
   ],
   "authors": [
     {
